@@ -19,11 +19,11 @@ $robot = new Skynet\Robot('english');
 
 $robot->train([
     [
-        'question' => 'I want to buy coffee I would like to get some coffee. where can i buy your coffee where could I buy coffee. could i buy some coffee how to buy coffee? How to get coffee? to buy coffee get some coffee',
+        'question' => 'buy coffee get some where can',
         'answer' => 'You can buy coffee in our shop: st. Lenina 420',
     ],
     [
-        'question' => 'How much is coffee I would like to know how much coffee costs. hear how much coffee costs where to see the price of coffee find out the price of coffee How can I find out the price of coffee? Where are your prices for coffee?',
+        'question' => 'how much coffee costs price coffee',
         'answer' => 'Coffee costs $5',
     ],
 ]);
