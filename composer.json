@@ -1,0 +1,27 @@
+{
+    "name": "chipslays/robot",
+    "type": "library",
+    "keywords": ["robot", "chatbot", "assistant"],
+    "license": "MIT",
+    "require": {
+        "php": "^8.1",
+        "wamania/php-stemmer": "^3.0"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^6.0",
+        "pestphp/pest": "^1.21"
+    },
+    "autoload": {
+        "psr-4": {
+            "Skynet\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest"
+    }
+}
