@@ -4,13 +4,13 @@ A very simple and indispensable helper that helps you automate the answers to si
 
 Supports all languages from [wamania/php-stemmer](https://github.com/wamania/php-stemmer#languages).
 
-# Installation
+## Installation
 
 ```bash
 composer require chipslays/robot
 ```
 
-# Getting Started
+## Getting Started
 
 ```php
 require __DIR__ . '/vendor/autoload.php';
@@ -31,7 +31,7 @@ $robot->train([
 $robot->reply('I Wanna BUY CofFEE, WHERE I CAN do IT?'); // You can buy coffee in our shop: st. Lenina 420
 ```
 
-# Methods
+## Methods
 
 #### `train(array $data): self`
 
@@ -79,6 +79,6 @@ $answer = $robot->reply('I Wanna BUY CofFEE, WHERE I CAN DO IT?', debug: true); 
 //   ]
 ```
 
-# License
+## License
 
 MIT
