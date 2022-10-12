@@ -26,3 +26,7 @@ it('get null answer', function () use ($robot) {
 it('with debug', function () use ($robot) {
     expect($robot->reply('I Wanna BUY CofFEE, WHERE I CAN DO IT?', true))->toBeArray();
 });
+
+it('with null debug', function () use ($robot) {
+    expect($robot->reply('qweqweqw eqeq', true))->toBeNull();
+});

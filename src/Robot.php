@@ -43,13 +43,15 @@ class Robot
             ];
         }
 
+        $result = array_filter($result, fn ($item) => $item['matches'] > 0);
+
         usort($result, fn ($a, $b) => $b['matches'] <=> $a['matches']);
 
         if ($debug) {
-            return $result;
+            return count($result) > 0 ? $result : null;
         }
 
-        return $result[0]['matches'] > 0 ? $result[0]['answer'] : null;
+        return count($result) > 0 && $result[0]['matches'] > 0 ? $result[0]['answer'] : null;
     }
 
     protected function textToWords(string $text): array
