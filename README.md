@@ -57,6 +57,36 @@ Get answer for message.
 $answer = $robot->ask('Where I can buy coffee?'); // returns answer string
 ```
 
+#### `callback(callable $callback): self`
+
+Handle raw item from train data.
+
+```php
+$robot->callback(function ($item) {
+    // array item from train data ['question' => ..., 'answer' => ..., ...] and additional values if u passed it
+    // or null if answer not found
+
+    if (!$item) {
+        return;
+    }
+
+    dump($item);
+});
+
+// ^ array:3 [
+//   "question" => "buy coffee get some where can"
+//   "answer" => "You can buy coffee in our shop: st. Lenina 420"
+//   "words" => array:6 [
+//     0 => "buy"
+//     1 => "coffe"
+//     2 => "get"
+//     3 => "some"
+//     4 => "where"
+//     5 => "can"
+//   ]
+// ]
+```
+
 #### `debug(bool $enable = false): self`
 
 Returns result as array.

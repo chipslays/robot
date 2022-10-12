@@ -13,6 +13,8 @@ class Robot
 
     protected bool $debug = false;
 
+    protected $callback;
+
     public function __construct(string $language = 'russian')
     {
         $this->stemmer = StemmerFactory::create($language);
@@ -39,6 +41,7 @@ class Robot
         foreach ($this->brain as $key => $item) {
             $diff = array_diff($item['words'], $words);
             $result[$key] = [
+                'index' => $key,
                 'matches' => count($item['words']) - count($diff),
                 'words' => array_values(array_diff($item['words'], $diff)),
                 'answer' => $item['answer'],
@@ -48,6 +51,10 @@ class Robot
         $result = array_filter($result, fn ($item) => $item['matches'] >= $minMatchesCount);
 
         usort($result, fn ($a, $b) => $b['matches'] <=> $a['matches']);
+
+        if ($this->callback) {
+            call_user_func_array($this->callback, [count($result) > 0 ? $this->brain[$result[0]['index']] : null]);
+        }
 
         if ($this->debug) {
             return count($result) > 0 ? $result : null;
@@ -59,6 +66,13 @@ class Robot
     public function debug(bool $enable): self
     {
         $this->debug = $enable;
+
+        return $this;
+    }
+
+    public function callback(callable $callback): self
+    {
+        $this->callback = $callback;
 
         return $this;
     }
