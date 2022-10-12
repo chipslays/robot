@@ -11,6 +11,8 @@ class Robot
 
     protected array $brain;
 
+    protected bool $debug = false;
+
     public function __construct(string $language = 'russian')
     {
         $this->stemmer = StemmerFactory::create($language);
@@ -28,7 +30,7 @@ class Robot
         return $this;
     }
 
-    public function reply(string $text, bool $debug = false): string|array|null
+    public function ask(string $text, int $minMatchesCount = 1): string|array|null
     {
         $words = $this->textToWords($text);
 
@@ -43,15 +45,22 @@ class Robot
             ];
         }
 
-        $result = array_filter($result, fn ($item) => $item['matches'] > 0);
+        $result = array_filter($result, fn ($item) => $item['matches'] >= $minMatchesCount);
 
         usort($result, fn ($a, $b) => $b['matches'] <=> $a['matches']);
 
-        if ($debug) {
+        if ($this->debug) {
             return count($result) > 0 ? $result : null;
         }
 
-        return count($result) > 0 && $result[0]['matches'] > 0 ? $result[0]['answer'] : null;
+        return count($result) > 0 ? $result[0]['answer'] : null;
+    }
+
+    public function debug(bool $enable): self
+    {
+        $this->debug = $enable;
+
+        return $this;
     }
 
     protected function textToWords(string $text): array

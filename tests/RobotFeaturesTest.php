@@ -16,17 +16,21 @@ $robot->train([
 ]);
 
 it('get answer', function () use ($robot) {
-    expect($robot->reply('I Wanna BUY CofFEE, WHERE I CAN DO IT?'))->toEqual('You can buy coffee in our shop: st. Lenina 420');
+    expect($robot->ask('Where I can buy coffee?'))->toEqual('You can buy coffee in our shop: st. Lenina 420');
+});
+
+it('get answer with min matches count', function () use ($robot) {
+    expect($robot->ask('Where I can buy coffee?', 999))->toBeNull();
 });
 
 it('get null answer', function () use ($robot) {
-    expect($robot->reply('qweqwe qewqwew qeqw'))->toBeNull();
+    expect($robot->ask('qweqwe qewqwew qeqw'))->toBeNull();
 });
 
 it('with debug', function () use ($robot) {
-    expect($robot->reply('I Wanna BUY CofFEE, WHERE I CAN DO IT?', true))->toBeArray();
+    expect($robot->debug(true)->ask('Where I can buy coffee?'))->toBeArray();
 });
 
 it('with null debug', function () use ($robot) {
-    expect($robot->reply('qweqweqw eqeq', true))->toBeNull();
+    expect($robot->debug(true)->ask('qweqweqw eqeq'))->toBeNull();
 });

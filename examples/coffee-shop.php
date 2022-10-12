@@ -17,7 +17,7 @@ $robot->train([
     ],
 ]);
 
-$answer = $robot->reply('I Wanna BUY CofFEE, WHERE I CAN DO IT?', debug: true);
+$answer = $robot->debug(true)->ask('Where I can buy coffee?');
 
 dump($answer);
 

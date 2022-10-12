@@ -28,12 +28,14 @@ $robot->train([
     ],
 ]);
 
-$robot->reply('I Wanna BUY CofFEE, WHERE I CAN do IT?'); // You can buy coffee in our shop: st. Lenina 420
+$robot->ask('Where I can buy coffee?'); // You can buy coffee in our shop: st. Lenina 420
 ```
 
 ## Methods
 
 #### `train(array $data): self`
+
+Train robot brain.
 
 ```php
 $robot->train([
@@ -47,12 +49,20 @@ $robot->train([
 ]);
 ```
 
-#### `reply(string $text, bool $debug = false): string|array|null`
+#### `ask(string $text, int $minMatchesCount = 1): string|array|null`
+
+Get answer for message.
 
 ```php
-$answer = $robot->reply('I Wanna BUY CofFEE, WHERE I CAN DO IT?'); // returns string
+$answer = $robot->ask('Where I can buy coffee?'); // returns answer string
+```
 
-$answer = $robot->reply('I Wanna BUY CofFEE, WHERE I CAN DO IT?', debug: true); // returns array with details
+#### `debug(bool $enable = false): self`
+
+Returns result as array.
+
+```php
+$answer = $robot->debug(true)->ask('Where I can buy coffee?'); // returns array of all matches detail
 
 // ^ array:2 [
 //   0 => array:3 [
