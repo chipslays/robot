@@ -57,7 +57,7 @@ class Robot
     protected function textToWords(string $text): array
     {
         // omG O_O
-        $words = array_unique(array_filter(array_map('trim', explode(' ', preg_replace('/[^a-zа-яё0-9\s]/u', '', preg_replace('/\s/', ' ', trim(mb_strtolower($text))))))));
+        $words = array_unique(array_filter(array_map('trim', explode(' ', preg_replace('/[^a-zа-я0-9\s]/u', '', preg_replace('/\s/', ' ', trim(str_replace('ё', 'е', mb_strtolower($text)))))))));
 
         foreach ($words as $key => $word) {
             $words[$key] = $this->stemmer->stem($word);
