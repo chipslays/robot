@@ -23,7 +23,7 @@ $robot->train([
         'answer' => 'You can buy coffee in our shop: st. Lenina 420',
     ],
     [
-        'question' => 'how much coffee costs price coffee',
+        'question' => 'how much coffee costs price',
         'answer' => 'Coffee costs $5',
     ],
 ]);
