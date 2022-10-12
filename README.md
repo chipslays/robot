@@ -7,7 +7,7 @@ Supports all languages from [wamania/php-stemmer](https://github.com/wamania/php
 # Installation
 
 ```bash
-composer require chipslays/robot
+composer require chipslays/robot --no-dev
 ```
 
 # Getting Started
