@@ -17,29 +17,25 @@ $robot->train([
     ],
 ]);
 
-$answer = $robot->reply('I Wanna BUY CofFEE, WHERE I CAN DO IT?', debug: false);
+$answer = $robot->reply('I Wanna BUY CofFEE, WHERE I CAN DO IT?', debug: true);
 
 dump($answer);
 
 // ^ array:2 [
 //     0 => array:3 [
-//       "matches" => 5
-//       "words" => array:5 [
-//         0 => "i"
-//         1 => "buy"
-//         2 => "coffee"
-//         3 => "where"
-//         4 => "can"
-//       ]
-//       "answer" => "You can buy coffe in our shop: st. Lenina 420"
-//     ]
-//     1 => array:3 [
 //       "matches" => 4
 //       "words" => array:4 [
-//         0 => "coffee"
-//         1 => "i"
+//         0 => "buy"
+//         1 => "coffe"
 //         2 => "where"
 //         3 => "can"
+//       ]
+//       "answer" => "You can buy coffee in our shop: st. Lenina 420"
+//     ]
+//     1 => array:3 [
+//       "matches" => 1
+//       "words" => array:1 [
+//         0 => "coffe"
 //       ]
 //       "answer" => "Coffee costs $5"
 //     ]
