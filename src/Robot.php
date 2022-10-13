@@ -9,7 +9,7 @@ class Robot
 {
     protected Stemmer $stemmer;
 
-    protected array $brain;
+    protected array $brain = [];
 
     protected int $minMatches = 1;
 
