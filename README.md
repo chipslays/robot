@@ -65,9 +65,11 @@ With callback.
 
 ```php
 // returns value from callback
-$answer = $robot->ask('Where I can buy coffee?', function (array|null $item): mixed {
+$answer = $robot->ask('Where I can buy coffee?', function (array|null $item, array $result) {
     // $item - it raw value from traind data with question,
     // answer and the values you passed, or null if answer not found.
+
+    // $result - contain sorted matches, if not found returns empty array
 
     if (!$item) return null;
 
