@@ -31,6 +31,10 @@ $robot->train([
 $robot->ask('Where I can buy coffee?'); // You can buy coffee in our shop: st. Lenina 420
 ```
 
+## Examples
+
+Examples can be found in [examples](/examples) folder.
+
 ## Methods
 
 #### `train(array $data): self`
