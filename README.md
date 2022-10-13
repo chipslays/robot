@@ -86,7 +86,6 @@ $robot->matches(1)->ask(...);
 Get more details by `ask()` method (matches count, words, etc).
 
 > **NOTE**
->
 > Not working if callback passed.
 
 ```php
