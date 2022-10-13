@@ -17,12 +17,6 @@ $robot->train([
     ],
 ]);
 
-$robot->callback(function ($item) {
-    // array item from train data ['question' => ..., 'answer' => ..., ...] and additional values if u passed before
-    // or null if answer not found
-    dump($item);
-});
-
 $answer = $robot->debug(true)->ask('Where I can buy coffee?');
 
 dump($answer);

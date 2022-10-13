@@ -11,9 +11,9 @@ class Robot
 
     protected array $brain;
 
-    protected bool $debug = false;
+    protected int $minMatches = 1;
 
-    protected $callback;
+    protected bool $debug = false;
 
     public function __construct(string $language = 'russian')
     {
@@ -32,7 +32,29 @@ class Robot
         return $this;
     }
 
-    public function ask(string $text, int $minMatchesCount = 1): string|array|null
+    public function ask(string $text, callable $callback = null): mixed
+    {
+        $result = $this->brainstorm($text, $this->minMatches);
+
+        if ($callback) {
+            return call_user_func_array($callback, [count($result) > 0 ? $this->brain[$result[0]['index']] : null]);
+        }
+
+        if ($this->debug) {
+            return count($result) > 0 ? $result : null;
+        }
+
+        return count($result) > 0 ? $result[0]['answer'] : null;
+    }
+
+    public function callback(string $text, callable $callback): mixed
+    {
+        $result = $this->brainstorm($text, $this->minMatches);
+
+
+    }
+
+    protected function brainstorm(string $text): array
     {
         $words = $this->textToWords($text);
 
@@ -48,31 +70,23 @@ class Robot
             ];
         }
 
-        $result = array_filter($result, fn ($item) => $item['matches'] >= $minMatchesCount);
+        $result = array_filter($result, fn ($item) => $item['matches'] >= $this->minMatches);
 
         usort($result, fn ($a, $b) => $b['matches'] <=> $a['matches']);
 
-        if ($this->callback) {
-            call_user_func_array($this->callback, [count($result) > 0 ? $this->brain[$result[0]['index']] : null]);
-        }
+        return $result;
+    }
 
-        if ($this->debug) {
-            return count($result) > 0 ? $result : null;
-        }
+    public function matches(int $count): self
+    {
+        $this->minMatches = $count;
 
-        return count($result) > 0 ? $result[0]['answer'] : null;
+        return $this;
     }
 
     public function debug(bool $enable): self
     {
         $this->debug = $enable;
-
-        return $this;
-    }
-
-    public function callback(callable $callback): self
-    {
-        $this->callback = $callback;
 
         return $this;
     }

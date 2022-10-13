@@ -20,7 +20,8 @@ it('get answer', function () use ($robot) {
 });
 
 it('get answer with min matches count', function () use ($robot) {
-    expect($robot->ask('Where I can buy coffee?', 999))->toBeNull();
+    expect($robot->matches(999)->ask('Where I can buy coffee?'))->toBeNull();
+    $robot->matches(1); // reset
 });
 
 it('get null answer', function () use ($robot) {
@@ -33,4 +34,24 @@ it('with debug', function () use ($robot) {
 
 it('with null debug', function () use ($robot) {
     expect($robot->debug(true)->ask('qweqweqw eqeq'))->toBeNull();
+});
+
+it('callback returns', function () use ($robot) {
+    $answer = $robot->ask('Where I can buy coffee?', function ($item) {
+        return 'string';
+    });
+
+    expect($answer)->toEqual('string');
+});
+
+it('callback item is array', function () use ($robot) {
+    $robot->ask('Where I can buy coffee?', function ($item) {
+        expect($item)->toBeArray();
+    });
+});
+
+it('callback item is null', function () use ($robot) {
+    $robot->ask('zxcz czx z', function ($item) {
+        expect($item)->toBeNull();
+    });
 });

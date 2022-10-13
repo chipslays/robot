@@ -49,7 +49,7 @@ $robot->train([
 ]);
 ```
 
-#### `ask(string $text, int $minMatchesCount = 1): string|array|null`
+#### `ask(string $text, callable $callback = 1): string|array|null`
 
 Get answer for message.
 
@@ -57,39 +57,36 @@ Get answer for message.
 $answer = $robot->ask('Where I can buy coffee?'); // returns answer string
 ```
 
-#### `callback(callable $callback): self`
-
-Handle raw item from train data.
+With callback.
 
 ```php
-$robot->callback(function ($item) {
-    // array item from train data ['question' => ..., 'answer' => ..., ...] and additional values if u passed it
-    // or null if answer not found
+// returns value from callback
+$answer = $robot->ask('Where I can buy coffee?', function (array|null $item): mixed {
+    // $item - it raw value from traind data with question,
+    // answer and the values you passed, or null if answer not found.
 
-    if (!$item) {
-        return;
-    }
+    if (!$item) return null;
 
-    dump($item);
+    return $item['answer'];
 });
 
-// ^ array:3 [
-//   "question" => "buy coffee get some where can"
-//   "answer" => "You can buy coffee in our shop: st. Lenina 420"
-//   "words" => array:6 [
-//     0 => "buy"
-//     1 => "coffe"
-//     2 => "get"
-//     3 => "some"
-//     4 => "where"
-//     5 => "can"
-//   ]
-// ]
+dump($answer); // You can buy coffee in our shop: st. Lenina 420
+```
+
+#### `matches(int $count = 1): self`
+
+How many matches we need to cut off unnecessary results.
+
+```php
+$robot->matches(1)->ask(...);
 ```
 
 #### `debug(bool $enable = false): self`
 
-Returns result as array.
+Get more details by `ask()` method (matches count, words, etc).
+
+> NOTE
+> Not working if callback passed.
 
 ```php
 $answer = $robot->debug(true)->ask('Where I can buy coffee?'); // returns array of all matches detail
