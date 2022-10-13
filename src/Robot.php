@@ -47,13 +47,6 @@ class Robot
         return count($result) > 0 ? $result[0]['answer'] : null;
     }
 
-    public function callback(string $text, callable $callback): mixed
-    {
-        $result = $this->brainstorm($text, $this->minMatches);
-
-
-    }
-
     protected function brainstorm(string $text): array
     {
         $words = $this->textToWords($text);
