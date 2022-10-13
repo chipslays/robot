@@ -37,7 +37,7 @@ it('with null debug', function () use ($robot) {
 });
 
 it('callback returns', function () use ($robot) {
-    $answer = $robot->ask('Where I can buy coffee?', function ($item) {
+    $answer = $robot->ask('Where I can buy coffee?', function ($item, $result) {
         return 'string';
     });
 
@@ -45,13 +45,25 @@ it('callback returns', function () use ($robot) {
 });
 
 it('callback item is array', function () use ($robot) {
-    $robot->ask('Where I can buy coffee?', function ($item) {
+    $robot->ask('Where I can buy coffee?', function ($item, $result) {
         expect($item)->toBeArray();
     });
 });
 
 it('callback item is null', function () use ($robot) {
-    $robot->ask('zxcz czx z', function ($item) {
+    $robot->ask('zxcz czx z', function ($item, $result) {
         expect($item)->toBeNull();
+    });
+});
+
+it('callback result is array', function () use ($robot) {
+    $robot->ask('zxcz czx z', function ($item, $result) {
+        expect($result)->toBeArray();
+    });
+});
+
+it('callback result is empty', function () use ($robot) {
+    $robot->ask('zxcz czx z', function ($item, $result) {
+        expect($result)->toEqual([]);
     });
 });

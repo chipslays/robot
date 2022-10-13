@@ -37,7 +37,7 @@ class Robot
         $result = $this->brainstorm($text, $this->minMatches);
 
         if ($callback) {
-            return call_user_func_array($callback, [count($result) > 0 ? $this->brain[$result[0]['index']] : null]);
+            return call_user_func_array($callback, [count($result) > 0 ? $this->brain[$result[0]['index']] : null, $result]);
         }
 
         if ($this->debug) {
