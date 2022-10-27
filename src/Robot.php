@@ -56,10 +56,10 @@ class Robot
         foreach ($this->brain as $key => $item) {
             $diff = array_diff($item['words'], $words);
             $result[$key] = [
-                'index' => $key,
+                'answer' => $item['answer'],
                 'matches' => count($item['words']) - count($diff),
                 'words' => array_values(array_diff($item['words'], $diff)),
-                'answer' => $item['answer'],
+                'index' => $key,
             ];
         }
 
