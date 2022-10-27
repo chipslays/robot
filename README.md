@@ -1,6 +1,6 @@
 # Robot 🦾
 
-A very simple and indispensable helper that helps you automate the answers to simple questions in your application.
+A very simple and indispensable helper that helps you automate the answers to simple questions in your application like a chatbot, chat on website, etc.
 
 Supports all languages from [wamania/php-stemmer](https://github.com/wamania/php-stemmer#languages).
 
